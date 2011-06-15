@@ -5,6 +5,7 @@ Repository for the haxelib node_externs
 Creating externs to use external modules in Node.js with HaXe often means writing one .hx file with a bunch of typedefs.  I don't think it's worth creating separate haxelibs or repositories for each module extern, so this repository is a collection point.
 
 So far there are externs for:
+
 	connect
 	everyauth
 	forever
