@@ -1,7 +1,7 @@
 <project name="nodejs_externs" url="https://github.com/dionjwa/nodejs_externs" license="BSD">
         <user name="dionjwa"/>
         <description>A collection of Node.js externs.</description>
-        <version name="0.0.1">Initial release.</version>
+        <version name="0.0.2">Haxelib nodejs is now a dependency .</version>
         <depends name="nodejs"/>
         <tag v="nodejs"/>
         <tag v="js"/>
