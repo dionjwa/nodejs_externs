@@ -1,0 +1,6 @@
+<project name="nodejs_externs" url="http://localhost" license="BSD">
+        <user name="dionjwa"/>
+        <description>A collection of Node.js externs.</description>
+        <version name="0.0.1">Initial.</version>
+        <tag v="nodejs"/>
+</project>
