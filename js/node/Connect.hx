@@ -6,7 +6,7 @@ using StringTools;
 using Lambda;
 
 typedef RouterApp = {
-	function get(path :String, onRequest :ServerRequest->ServerResponse->Dynamic->Void) :Void;
+	function get(path :String, onRequest :NodeHttpServerReq->NodeHttpServerResp->Dynamic->Void) :Void;
 }
 
 typedef OAuth2 = {
@@ -36,7 +36,7 @@ typedef ConnectServer = {
 
 // typedef Next = Void->MiddleWare;
 // typedef MiddleWare = ServerRequest->ServerResponse->Next->Void;
-typedef MiddleWare = ServerRequest->ServerResponse->Dynamic->Void;
+typedef MiddleWare = NodeHttpServerReq->NodeHttpServerResp->Dynamic->Void;
 
 typedef Connect = {
 	function createServer (a1 :Dynamic, ?a2 :Dynamic, ?a3 :Dynamic, ?a4 :Dynamic, ?a5 :Dynamic, ?a6 :Dynamic, ?a7 :Dynamic, ?a8 :Dynamic, ?a9 :Dynamic) :ConnectServer;

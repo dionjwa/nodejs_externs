@@ -1,8 +1,7 @@
 <project name="nodejs_externs" url="https://github.com/dionjwa/nodejs_externs" license="BSD">
         <user name="dionjwa"/>
-        <description>A collection of Node.js externs.</description>
-        <version name="0.0.2">Haxelib nodejs is now a dependency .</version>
-        <depends name="nodejs"/>
+        <description>A collection of Node.js externs: Connect, EveryAuth, Forever, Mime, UserAgent, V8Profiler</description>
+        <version name="0.0.3">List the libraries.</version>
         <tag v="nodejs"/>
         <tag v="js"/>
 </project>
