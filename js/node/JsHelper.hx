@@ -8,8 +8,10 @@ import js.Node;
 
 class JsHelper {
 
-	inline public static function new_<T>(x : T) : T return
-		untyped __js__("new x()")
+	inline public static function new_ < T > (_x : T) : T {
+		var x = _x;
+		return untyped __js__("new x()");
+	}
 	
 	public static function requireAs<T>(name : String, cl : Class<T>) : T return
 		untyped js.Node.require(name)

@@ -27,6 +27,7 @@ typedef ExpressServer = {
 	function listen (port :Int, ?address :String) :Void;
 }
 
+
 typedef Express = {
 
 	function createServer (a1 :Dynamic, ?a2 :Dynamic, ?a3 :Dynamic, ?a4 :Dynamic, ?a5 :Dynamic, ?a6 :Dynamic, ?a7 :Dynamic, ?a8 :Dynamic, ?a9 :Dynamic) :ExpressServer;
@@ -39,8 +40,13 @@ typedef Express = {
 	function errorHandler (options :Dynamic) :MiddleWare;	
 
 	function logger() : MiddleWare;
-	@:native("static") function static_(path : String, ?option : Dynamic) : MiddleWare;
-	
 }
 
-// class ExpressExtensions 
+class ExpressExtensions {
+	public static function static_(exp : Express, path : String, ?option : Dynamic) : MiddleWare {
+		var x = exp;
+		var p = path;
+		var o = option;
+		return untyped __js__("x.static(p, o)");
+	}
+}
