@@ -31,6 +31,8 @@ typedef EveryAuth = {
 
 typedef ConnectServer = {
 	function use (?middlewareMountPoint :Dynamic, middleware :Dynamic) :ConnectServer;
+
+	@:overload(function(port :Int, ready : Void -> Void):Void { } )
 	function listen (port :Int, ?address :String) :Void;
 }
 
@@ -45,5 +47,5 @@ typedef Connect = {
 	function session(params :Dynamic) :Void;
 	function router(routes :Dynamic->Void) :Void;
 	function Static (path :String, ?options :Dynamic) :MiddleWare; 
-	function errorHandler (options :Dynamic) :MiddleWare;
+	function errorHandler (options :Dynamic) :MiddleWare;	
 }
