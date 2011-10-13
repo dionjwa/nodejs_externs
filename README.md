@@ -12,6 +12,10 @@ So far there are externs for:
 	v8profiler
 	node-mime
 	node-user-agent
+	express
+	facebook-client
+	node-uuid
+	socket-io
 	
 	
 Note that none of these externs are complete, in that the typedefs don't necessarily define every single variable and function.  They define enough to be useful.  Feel free to contribute additions and improvements. 
