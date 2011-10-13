@@ -27,23 +27,21 @@ typedef ExpressServer = {
 	function listen (port :Int, ?address :String) :Void;
 }
 
+extern
+class Express {
 
-typedef Express = {
+	public function createServer (a1 :Dynamic, ?a2 :Dynamic, ?a3 :Dynamic, ?a4 :Dynamic, ?a5 :Dynamic, ?a6 :Dynamic, ?a7 :Dynamic, ?a8 :Dynamic, ?a9 :Dynamic) :ExpressServer;
 
-	function createServer (a1 :Dynamic, ?a2 :Dynamic, ?a3 :Dynamic, ?a4 :Dynamic, ?a5 :Dynamic, ?a6 :Dynamic, ?a7 :Dynamic, ?a8 :Dynamic, ?a9 :Dynamic) :ExpressServer;
+	public function cookieParser() :MiddleWare;
+	public function bodyParser() :MiddleWare;
+	public function session(params :Dynamic) :Void;
+	public function router(routes :Dynamic->Void) :Void;
+	public function Static (path :String, ?options :Dynamic) :MiddleWare; 
+	public function errorHandler (options :Dynamic) :MiddleWare;	
 
-	function cookieParser() :MiddleWare;
-	function bodyParser() :MiddleWare;
-	function session(params :Dynamic) :Void;
-	function router(routes :Dynamic->Void) :Void;
-	function Static (path :String, ?options :Dynamic) :MiddleWare; 
-	function errorHandler (options :Dynamic) :MiddleWare;	
+	public function logger() : MiddleWare;
 
-	function logger() : MiddleWare;
-}
-
-class ExpressExtensions {
-	public static function static_(exp : Express, path : String, ?option : Dynamic) : MiddleWare {
+	inline public static function static_(exp : Express, path : String, ?option : Dynamic) : MiddleWare {
 		var x = exp;
 		var p = path;
 		var o = option;
