@@ -1,11 +1,10 @@
 package js.node;
 
-typedef NodeListener = Dynamic;
+import js.node.SocketIo;
 
 @:native("io")
 extern
 class Io {
-
 
   // details : Boolean 'force new connection'
   public static function connect(?host : String, ?details : Dynamic) : SocketNamespace;
@@ -13,26 +12,16 @@ class Io {
   public static var protocol : Int;
   public static var transports : Array<Dynamic>;
 
-
-// en NODE à ajouter:
+// all above functions are nodejs only (dunno if there's a define for that):
+  public static function Socket(options : Dynamic) : Void;
 /*
      * Expose Transport
-     *
      * @api public
-
     io.Transport = require('./transport').Transport;
 
      * Expose all transports
-     *
      * @api public
-
     io.Transport.XHR = require('./transports/xhr').XHR;
-
-     * Expose Socket
-     *
-     * @api public
-
-    io.Socket = require('./socket').Socket;
 */
 }
 
@@ -55,34 +44,14 @@ class Socket {
   public function disconnect() : Socket;
 
   // from js.Node.NodeEventEmitter
-  function addListener(event:String,fn: NodeListener):Dynamic;
-  function on(event:String,fn:NodeListener):Dynamic;
-  function once(event:String,fn:NodeListener):Void;
-  function removeListener(event:String,listener:NodeListener):Void;
-  function removeAllListeners(event:String):Void;
-  function listeners(event:String):Array<NodeListener>;
-  function setMaxListeners(m:Int):Void;
-  function emit(event:String,?arg1:Dynamic,?arg2:Dynamic,?arg3:Dynamic):Void;
-}
-
-extern
-class SocketNamespace {
-
-//  public static function SocketNamespace (socket : Dynamic, name : String) : Void;
-  public function send(data : Dynamic, fn : Dynamic) : SocketNamespace;
-  public function disconnect () : SocketNamespace;
-
-  // from js.Node.NodeEventEmitter
-  function addListener(event:String,fn:NodeListener):Dynamic;
-  function on(event:String,fn:NodeListener):Dynamic;
-  function once(event:String,fn:NodeListener):Void;
-  function removeListener(event:String,listener:NodeListener):Void;
-  function removeAllListeners(event:String):Void;
-  function listeners(event:String):Array<NodeListener>;
-  function setMaxListeners(m:Int):Void;
-
-	@:overload(function(name : String) : SocketNamespace{ } )
-  function emit(event:String,?arg1:Dynamic,?arg2:Dynamic,?arg3:Dynamic):Void;
+  public function addListener(event:String,fn: NodeListener):Dynamic;
+  public function on(event:String,fn:NodeListener):Dynamic;
+  public function once(event:String,fn:NodeListener):Void;
+  public function removeListener(event:String,listener:NodeListener):Void;
+  public function removeAllListeners(event:String):Void;
+  public function listeners(event:String):Array<NodeListener>;
+  public function setMaxListeners(m:Int):Void;
+  public function emit(event:String,?arg1:Dynamic,?arg2:Dynamic,?arg3:Dynamic):Void;
 }
 
 extern

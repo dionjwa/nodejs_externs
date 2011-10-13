@@ -9,7 +9,26 @@ typedef SocketIo = {
 	function listen(?server : Dynamic, ?options : Dynamic, ?fn : Dynamic) : SocketIoManager;
 }
 
-typedef SocketNameSpace = {	
+typedef NodeListener = Dynamic;
+
+extern
+class SocketNamespace {
+
+//  public static function SocketNamespace (socket : Dynamic, name : String) : Void;
+  public function send(data : Dynamic, fn : Dynamic) : SocketNamespace;
+  public function disconnect () : SocketNamespace;
+
+  // from js.Node.NodeEventEmitter
+  public function addListener(event:String,fn:NodeListener):Dynamic;
+  public function on(event:String,fn:NodeListener):Dynamic;
+  public function once(event:String,fn:NodeListener):Void;
+  public function removeListener(event:String,listener:NodeListener):Void;
+  public function removeAllListeners(event:String):Void;
+  public function listeners(event:String):Array<NodeListener>;
+  public function setMaxListeners(m:Int):Void;
+
+	@:overload(function(name : String) : SocketNamespace{ } )
+  public function emit(event:String,?arg1:Dynamic,?arg2:Dynamic,?arg3:Dynamic):Void;
 }
 
 typedef SocketIoManager = {
@@ -30,7 +49,7 @@ typedef SocketIoManager = {
 	@:overload(function(fn : SocketIoManager -> Void):SocketIoManager {})
 	function configure(env : Dynamic, fn : SocketIoManager -> Void) : SocketIoManager;
 
-	function of(nsp : Dynamic) : SocketNameSpace;
+	function of(nsp : Dynamic) : SocketNamespace;
 	
 }
 
