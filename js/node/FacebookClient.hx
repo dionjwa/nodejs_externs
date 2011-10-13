@@ -1,12 +1,23 @@
 package js.node;
+import js.Node;
 
 /**
  * ...
  * @author sledorze
  */
 
-typedef FacebookClient = {
-	function getSessionByAccessToken(access_token : Dynamic) : (FacebookSession -> Void) -> Void;
+@:native("FacebookClient")
+extern
+class FacebookClient {
+	
+	public function getSessionByAccessToken(access_token : Dynamic) : (FacebookSession -> Void) -> Void;
+	
+	public function new():Void; 
+
+	private static function __init__() : Void untyped { 
+	  FacebookClient = Node.require('facebook-client').FacebookClient; 
+	}
+	
 }
 
 typedef FacebookSession = {
