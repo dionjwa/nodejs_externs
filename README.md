@@ -16,6 +16,7 @@ So far there are externs for:
 	facebook-client
 	node-uuid
 	socket-io
+	socket-io-client
 	
 	
 Note that none of these externs are complete, in that the typedefs don't necessarily define every single variable and function.  They define enough to be useful.  Feel free to contribute additions and improvements. 
