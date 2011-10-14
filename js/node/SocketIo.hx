@@ -9,7 +9,7 @@ typedef SocketIo = {
 	function listen(?server : Dynamic, ?options : Dynamic, ?fn : Dynamic) : SocketIoManager;
 }
 
-typedef NodeListener = Dynamic;
+typedef NodeListener = Dynamic -> Void;
 
 extern
 class SocketNamespace {
