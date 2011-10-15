@@ -2,18 +2,15 @@ package js.node;
 
 import js.Node;
 
+import js.node.MongoDBTypes;
 import js.node.MongoDbConnection;
+import js.node.MongoDbCollection;
+
 /**
  * Externs for mongodb natives
  * ...
  * @author sledorze
  */
-typedef Document = Dynamic;
-typedef Error = Null<Dynamic>;
-typedef Admin = Dynamic;
-typedef Cursor = Dynamic;
-typedef Collection = Dynamic;
-typedef DBRef = Dynamic;
 
 
 @:native("Db")
