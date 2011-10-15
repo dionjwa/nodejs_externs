@@ -3,8 +3,10 @@ package js.node;
 import js.Node;
 
 import js.node.MongoDBTypes;
+import js.node.MongoDbCursor;
 import js.node.MongoDbConnection;
 import js.node.MongoDbCollection;
+
 
 /**
  * Externs for mongodb natives

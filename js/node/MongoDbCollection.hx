@@ -1,6 +1,7 @@
 package js.node;
 
 import js.node.MongoDBTypes;
+import js.node.MongoDbCursor;
 import js.node.MongoDb;
 
 /**
