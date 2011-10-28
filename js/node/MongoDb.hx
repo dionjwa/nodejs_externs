@@ -14,25 +14,54 @@ import js.node.MongoDbCollection;
  * @author sledorze
  */
 
+/* To Implement (these are 'new's)
+class BsonSerializer {
+  new client.bson_serializer.Long(numberString)
+  new client.bson_serializer.ObjectID(hexString)
+  new client.bson_serializer.Timestamp()  // the actual unique number is generated on insert.
+  new client.bson_serializer.DBRef(collectionName, id, dbName)
+  new client.bson_serializer.Binary(buffer)  // takes a string or Buffer
+  new client.bson_serializer.Code(code, [context])  
+}
+*/
+class MongoIdHelper {
+  
+  inline public static function cleanId<Document>(data: Document) : Document {
+    untyped data._id = Std.string(data._id);
+    return data;
+  }
+  
+  inline public static function cleanIds(datas: Array<Document>) : Array<Document> {
+    for (data in datas) {
+      untyped data._id = Std.string(data._id);
+    }
+    return datas;
+  }
+  
+  inline public static function mongoId<T>(x : T) : Dynamic return
+    untyped db.bson_serializer.ObjectID(untyped x._id)
+}
 
 @:native("Db")
 extern
 class Db {
 
+//  public var bson_serializer : BsonSerializer;
+  
   public function open(callBack : Dynamic -> Db -> Void) : Void;
   public function close() : Void;
   public function admin(callBack : Error -> Admin -> Void) : Void;
 
 
-  @:overload(function () : Cursor {})
-  @:overload(function (callBack : Error -> Cursor -> Void) : Void {})
-  public function collectionsInfo(collection_name : String, callBack : Error -> Cursor -> Void) : Void;
+  @:overload(function () : Cursor<Document> {})
+  @:overload(function (callBack : Error -> Cursor<Document> -> Void) : Void {})
+  public function collectionsInfo(collection_name : String, callBack : Error -> Cursor<Document> -> Void) : Void;
 
   @:overload(function (callBack : Error -> Array<Document> -> Void) : Void {})
   public function collectionNames(collection_name : String, callBack : Error -> Array<Document> -> Void) : Void;
 
-  public function collection(collectionName : String, callBack : Error -> Collection -> Void) : Void;
-  public function collections(callBack : Error -> Array<Collection> -> Void) : Void;
+  public function collection<Document>(collectionName : String, callBack : Error -> Collection<Document> -> Void) : Void;
+  public function collections(callBack : Error -> Array<Collection<Document>> -> Void) : Void;
 
   @:overload(function (code : Dynamic, callBack : Error -> String -> Void) : Void {})
   public function eval(code : Dynamic, parameters : Dynamic, callBack : Error -> String -> Void) : Void;
@@ -47,7 +76,7 @@ class Db {
 
   public function logout (callBack : Error -> Dynamic -> Void) : Void;
 
-  public function createCollection (collectionName : String, options : Dynamic, callBack : Error -> Collection -> Void) : Void;
+  public function createCollection<Document> (collectionName : String, options : Dynamic, callBack : Error -> Collection<Document> -> Void) : Void;
 
   public function command (selector : String /*?*/, callBack : Error -> Dynamic -> Void /*?*/) : Void;
 

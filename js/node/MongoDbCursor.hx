@@ -13,9 +13,9 @@ typedef QueryCommand = Dynamic
 
 @:native("Cursor")
 extern
-class Cursor {
+class Cursor<Document> {
 
-  public function new(db : Db, collection : Collection, selector : Dynamic, fields : Dynamic, skip : Int, limit : Int, sort : Dynamic, hint : Dynamic, explain : Bool, snapshot : Bool, timeout : Int, tailable : Bool, batchSize : Int):Void;
+  public function new(db : Db, collection : Collection<Document>, selector : Dynamic, fields : Dynamic, skip : Int, limit : Int, sort : Dynamic, hint : Dynamic, explain : Bool, snapshot : Bool, timeout : Int, tailable : Bool, batchSize : Int):Void;
 
 	private static function __init__() : Void untyped {
     var req = Node.require('mongodb');
@@ -23,7 +23,7 @@ class Cursor {
 	}
 
   public var db : Db;
-  public var collection : Collection;
+  public var collection : Collection<Document>;
   public var selector : Dynamic;
   public var fields : Dynamic;
   public var skipValue : Bool;
@@ -58,7 +58,7 @@ class Cursor {
  * Returns an array of documents. The caller is responsible for making sure that there
  * is enough memory to store the results. Note that the array only contain partial
  * results when this cursor had been previouly accessed. In that case,
- * {@link Cursor#rewind} can be used to reset the cursor.
+ * {@link Cursor<Document>#rewind} can be used to reset the cursor.
  *
  * @param callBack {function(Error, Array<Object>)} This will be called after executing
  *     this method successfully. The first paramter will contain the Error object if an
@@ -70,16 +70,16 @@ class Cursor {
  *       <li>Attempting to call this method with a tailable cursor.</li>
  *     </ol>
  *
- * @see Cursor#rewind
- * @see Cursor#each
+ * @see Cursor<Document>#rewind
+ * @see Cursor<Document>#each
  */
   public function toArray (callBack : Error -> Array<Document> -> Void) : Void;
 
 /**
- * Iterates over all the documents for this cursor. As with {@link Cursor#toArray},
+ * Iterates over all the documents for this cursor. As with {@link Cursor<Document>#toArray},
  * not all of the elements will be iterated if this cursor had been previouly accessed.
- * In that case, {@link Cursor#rewind} can be used to reset the cursor. However, unlike
- * {@link Cursor#toArray}, the cursor will only hold a maximum of batch size elements
+ * In that case, {@link Cursor<Document>#rewind} can be used to reset the cursor. However, unlike
+ * {@link Cursor<Document>#toArray}, the cursor will only hold a maximum of batch size elements
  * at any given time if batch size is specified. Otherwise, the caller is responsible
  * for making sure that the entire result can fit the memory.
  *
@@ -88,9 +88,9 @@ class Cursor {
  *     object if an error occured, or null otherwise. While the second paramter will
  *     contain the document.
  *
- * @see Cursor#rewind
- * @see Cursor#toArray
- * @see Cursor#batchSize
+ * @see Cursor<Document>#rewind
+ * @see Cursor<Document>#toArray
+ * @see Cursor<Document>#batchSize
  */
   public function each (callBack : Error -> Document -> Void) : Void;
 
@@ -128,61 +128,61 @@ class Cursor {
  * @param direction {string|number} This determines how the results are sorted. "asc",
  *     "ascending" or 1 for asceding order while "desc", "desceding or -1 for descending
  *     order. Note that the strings are case insensitive.
- * @param callBack {?function(?Error, ?Cursor)} This will be called after executing
+ * @param callBack {?function(?Error, ?Cursor<Document>)} This will be called after executing
  *     this method. The first parameter will contain an error object when the
  *     cursor is already closed while the second parameter will contain a reference
  *     to this object upon successful execution.
  *
- * @return {Cursor} an instance of this object.
+ * @return {Cursor<Document>} an instance of this object.
  *
- * @see Cursor#formatSortValue
+ * @see Cursor<Document>#formatSortValue
  */
 
-  @:overload(function(keyList : Array<Array<Dynamic>>, ?callBack : Error -> Cursor -> Void) : Cursor {})
-  @:overload(function(key : String, direction : Int, ?callBack : Error -> Cursor -> Void) : Cursor {})
-  public function sort(key : String, direction : String, ?callBack : Error -> Cursor -> Void) : Cursor;
+  @:overload(function(keyList : Array<Array<Dynamic>>, ?callBack : Error -> Cursor<Document> -> Void) : Cursor<Document> {})
+  @:overload(function(key : String, direction : Int, ?callBack : Error -> Cursor<Document> -> Void) : Cursor<Document> {})
+  public function sort(key : String, direction : String, ?callBack : Error -> Cursor<Document> -> Void) : Cursor<Document>;
 
 /**
  * Sets the limit parameter of this cursor to the given value.
  *
  * @param limit {Number} The new limit.
- * @param callBack {?function(?Error, ?Cursor)} This will be called after executing
+ * @param callBack {?function(?Error, ?Cursor<Document>)} This will be called after executing
  *     this method. The first parameter will contain an error object when the
  *     limit given is not a valid number or when the cursor is already closed while
  *     the second parameter will contain a reference to this object upon successful
  *     execution.
  *
- * @return {Cursor} an instance of this object.
+ * @return {Cursor<Document>} an instance of this object.
  */
-  public function limit(limit : Int, ?callBack : Error -> Cursor -> Void) : Cursor;
+  public function limit(limit : Int, ?callBack : Error -> Cursor<Document> -> Void) : Cursor<Document>;
 
 /**
  * Sets the skip parameter of this cursor to the given value.
  *
  * @param skip {Number} The new skip value.
- * @param callBack {?function(?Error, ?Cursor)} This will be called after executing
+ * @param callBack {?function(?Error, ?Cursor<Document>)} This will be called after executing
  *     this method. The first parameter will contain an error object when the
  *     skip value given is not a valid number or when the cursor is already closed while
  *     the second parameter will contain a reference to this object upon successful
  *     execution.
  *
- * @return {Cursor} an instance of this object.
+ * @return {Cursor<Document>} an instance of this object.
  */
-  public function skip(skip : Int, ?callBack : Error -> Cursor -> Void) : Cursor;
+  public function skip(skip : Int, ?callBack : Error -> Cursor<Document> -> Void) : Cursor<Document>;
 
 /**
  * Sets the batch size parameter of this cursor to the given value.
  *
  * @param batchSize {Number} The new batch size.
- * @param callBack {?function(?Error, ?Cursor)} This will be called after executing
+ * @param callBack {?function(?Error, ?Cursor<Document>)} This will be called after executing
  *     this method. The first parameter will contain an error object when the
  *     batchSize given is not a valid number or when the cursor is already closed while
  *     the second parameter will contain a reference to this object upon successful
  *     execution.
  *
- * @return {Cursor} an instance of this object.
+ * @return {Cursor<Document>} an instance of this object.
  */
-  public function batchSize(batchSize : Int, callBack : Error -> Cursor -> Void) : Cursor;
+  public function batchSize(batchSize : Int, callBack : Error -> Cursor<Document> -> Void) : Cursor<Document>;
 
 /**
  * @return {number} The number of records to request per batch.
@@ -223,8 +223,8 @@ class Cursor {
  *     the second parameter will contain a document from the returned result or null
  *     if there are no more results.
  *
- * @see Cursor#limit
- * @see Cursor#batchSize
+ * @see Cursor<Document>#limit
+ * @see Cursor<Document>#batchSize
  */
   public function nextObject(callBack : Error -> Document -> Void) : Void;
 
@@ -261,7 +261,7 @@ class Cursor {
  *     this method. The first parameter will always contain null while the second
  *     parameter will contain a reference to this cursor.
  */
-  public function close(callBack : Error -> Cursor -> Void) : Void;
+  public function close(callBack : Error -> Cursor<Document> -> Void) : Void;
 
 /**
  * @return true if this cursor is closed
