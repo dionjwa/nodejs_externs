@@ -50,7 +50,4 @@ typedef SocketIoManager = {
 	function configure(env : Dynamic, fn : SocketIoManager -> Void) : SocketIoManager;
 
 	function of(nsp : Dynamic) : SocketNamespace;
-	
 }
-
-
