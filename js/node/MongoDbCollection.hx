@@ -55,9 +55,9 @@ class Collection<Document> {
     multi - true/false (update all documents matching spec)
     safe - true/false (perform check if the operation failed, required extra call to db)
 **/
-  @:overload(function(spec : Dynamic, document : Dynamic, callBack : Error -> Document -> Void) : Void {})
+  @:overload(function(spec : Dynamic, document : Dynamic, callBack : Error -> Void) : Void {})
   @:overload(function(spec : Dynamic, document : Dynamic, options : Dynamic) : Void {})
-  public function update(spec : Dynamic, document : Dynamic, options : Dynamic, callBack : Error -> Document -> Void) : Void;
+  public function update(spec : Dynamic, document : Dynamic, options : Dynamic, callBack : Error -> Void) : Void;
 
 /**
   Fetch a distinct collection
