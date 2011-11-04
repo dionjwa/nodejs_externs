@@ -38,7 +38,10 @@ class MongoIdHelper {
     return datas;
   }
   
-  inline public static function mongoId<T>(x : T) : Dynamic return
+  inline public static function mongoIdStr(db : Db, x : String) : Dynamic return
+    untyped db.bson_serializer.ObjectID(x)
+  
+  inline public static function mongoId<T>(db : Db, x : T) : Dynamic return
     untyped db.bson_serializer.ObjectID(untyped x._id)
 }
 
