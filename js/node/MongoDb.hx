@@ -87,7 +87,7 @@ class Db {
 
   public function renameCollection (fromCollection : String, toCollection : String, callBack : Error -> Dynamic /*?*/ -> Void) : Void;
 
-  public function lastError (callBack : Error -> Dynamic /*?*/ -> Void) : Void;
+  public function lastError (callBack : Error -> Array<Dynamic> /*?*/ -> Void) : Void;
   public function error (callBack : Error -> Dynamic /*?*/ -> Void) : Void;
 
   public function lastStatus(callBack : Error -> Dynamic -> Void) : Void;

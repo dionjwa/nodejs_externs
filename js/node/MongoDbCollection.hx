@@ -55,9 +55,9 @@ class Collection<Document> {
     multi - true/false (update all documents matching spec)
     safe - true/false (perform check if the operation failed, required extra call to db)
 **/
-  @:overload(function(spec : Dynamic, document : Dynamic, callBack : Error -> Void) : Void {})
+  @:overload(function(spec : Dynamic, document : Dynamic, options : Dynamic, callBack : Error -> Void) : Void {})
   @:overload(function(spec : Dynamic, document : Dynamic, options : Dynamic) : Void {})
-  public function update(spec : Dynamic, document : Dynamic, options : Dynamic, callBack : Error -> Void) : Void;
+  public function update(spec : Dynamic, document : Dynamic, callBack : Error -> Void) : Void;
 
 /**
   Fetch a distinct collection
@@ -81,10 +81,10 @@ class Collection<Document> {
     new:      set to true if you want to return the modified object rather than the original. Ignored for remove.
     upsert:       true/false (perform upsert operation)
 **/
-  @:overload(function(query : Dynamic, callBack : Error -> Dynamic -> Void) : Void {})
-  @:overload(function(query : Dynamic, sort : Array<Document>, callBack : Error -> Dynamic -> Void) : Void {})
-  @:overload(function(query : Dynamic, sort : Array<Document>, update : Dynamic, callBack : Error -> Dynamic -> Void) : Void {})
-  public function findAndModify(query : Dynamic, sort : Array<Document>, update : Dynamic, options : Dynamic, callBack : Error -> Dynamic -> Void) : Void;
+  @:overload(function(query : Dynamic, callBack : Error -> Document -> Void) : Void {})
+  @:overload(function(query : Dynamic, sort : Array<Dynamic>, callBack : Error -> Document -> Void) : Void {})
+  @:overload(function(query : Dynamic, sort : Array<Dynamic>, update : Dynamic, callBack : Error -> Document -> Void) : Void {})
+  public function findAndModify(query : Dynamic, sort : Array<Dynamic>, update : Dynamic, options : Dynamic, callBack : Error -> Document -> Void) : Void;
 
 /**
  * Various argument possibilities
