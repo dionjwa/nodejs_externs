@@ -46,6 +46,6 @@ typedef Connect = {
 	function bodyParser() :MiddleWare;
 	function session(params :Dynamic) :Void;
 	function router(routes :Dynamic->Void) :Void;
-	function Static (path :String, ?options :Dynamic) :MiddleWare; 
-	function errorHandler (options :Dynamic) :MiddleWare;	
+	function Static (path :String, ?options :Dynamic) :MiddleWare;
+	function errorHandler (options :Dynamic) :MiddleWare;
 }

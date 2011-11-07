@@ -15,31 +15,31 @@ typedef Stats = {
 
 @:native("Collection")
 extern
-class Collection {
+class Collection<Document> {
 
-  @:overload(function(doc : Document, callBack : Error -> Array<Document> -> Void) : Collection {})
-  @:overload(function(doc : Document, options : Dynamic) : Collection {})
-  public function insert(doc : Document, options : Dynamic, callBack : Error -> Array<Document> -> Void) : Collection;
+  @:overload(function(doc : Document, callBack : Error -> Array<Document> -> Void) : Collection<Document> {})
+  @:overload(function(doc : Document, options : Dynamic) : Collection<Document> {})
+  public function insert(doc : Document, options : Dynamic, callBack : Error -> Array<Document> -> Void) : Collection<Document>;
 
   // throws if name is malformed
   public function checkCollectionName (collectionName : String) : Void;
 
-  @:overload(function (callBack : Error -> Collection -> Void) : Void {})
-  @:overload(function (selector : Dynamic, callBack : Error -> Collection -> Void) : Void {})
-  public function remove (selector : Dynamic, options : Dynamic, callBack : Error -> Collection -> Void) : Void;
+  @:overload(function (callBack : Error -> Collection<Document> -> Void) : Void {})
+  @:overload(function (selector : Dynamic, callBack : Error -> Collection<Document> -> Void) : Void {})
+  public function remove (selector : Dynamic, options : Dynamic, callBack : Error -> Collection<Document> -> Void) : Void;
 
 
 
-  public function rename (collectionName : String, callBack : Error -> Collection -> Void) : Void;
+  public function rename (collectionName : String, callBack : Error -> Collection<Document> -> Void) : Void;
 
-  @:overload(function(docs : Array<Document>, callBack : Error -> Array<Document> -> Void) : Collection {})
-  @:overload(function(docs : Array<Document>, options : Dynamic) : Collection {})
-  public function insertAll(docs : Array<Document>, options : Dynamic, callBack : Error -> Array<Document> -> Void) : Collection;
+  @:overload(function(docs : Array<Document>, callBack : Error -> Array<Document> -> Void) : Collection<Document> {})
+  @:overload(function(docs : Array<Document>, options : Dynamic) : Collection<Document> {})
+  public function insertAll(docs : Array<Document>, options : Dynamic, callBack : Error -> Array<Document> -> Void) : Collection<Document>;
 
 
 
-  @:overload(function(doc : Document, callBack : Error -> Document -> Void) : Collection {})
-  @:overload(function(doc : Document, options : Dynamic) : Collection {})
+  @:overload(function(doc : Document, callBack : Error -> Document -> Void) : Collection<Document> {})
+  @:overload(function(doc : Document, options : Dynamic) : Collection<Document> {})
   public function save (doc : Document, options : Dynamic, callBack : Error -> Document -> Void) : Void;
 
 /**
@@ -55,9 +55,9 @@ class Collection {
     multi - true/false (update all documents matching spec)
     safe - true/false (perform check if the operation failed, required extra call to db)
 **/
-  @:overload(function(spec : Dynamic, document : Dynamic, callBack : Error -> Document -> Void) : Void {})
+  @:overload(function(spec : Dynamic, document : Dynamic, options : Dynamic, callBack : Error -> Void) : Void {})
   @:overload(function(spec : Dynamic, document : Dynamic, options : Dynamic) : Void {})
-  public function update(spec : Dynamic, document : Dynamic, options : Dynamic, callBack : Error -> Document -> Void) : Void;
+  public function update(spec : Dynamic, document : Dynamic, callBack : Error -> Void) : Void;
 
 /**
   Fetch a distinct collection
@@ -81,10 +81,10 @@ class Collection {
     new:      set to true if you want to return the modified object rather than the original. Ignored for remove.
     upsert:       true/false (perform upsert operation)
 **/
-  @:overload(function(query : Dynamic, callBack : Error -> Dynamic -> Void) : Void {})
-  @:overload(function(query : Dynamic, sort : Array<Document>, callBack : Error -> Dynamic -> Void) : Void {})
-  @:overload(function(query : Dynamic, sort : Array<Document>, update : Dynamic, callBack : Error -> Dynamic -> Void) : Void {})
-  public function findAndModify(query : Dynamic, sort : Array<Document>, update : Dynamic, options : Dynamic, callBack : Error -> Dynamic -> Void) : Void;
+  @:overload(function(query : Dynamic, callBack : Error -> Document -> Void) : Void {})
+  @:overload(function(query : Dynamic, sort : Array<Dynamic>, callBack : Error -> Document -> Void) : Void {})
+  @:overload(function(query : Dynamic, sort : Array<Dynamic>, update : Dynamic, callBack : Error -> Document -> Void) : Void {})
+  public function findAndModify(query : Dynamic, sort : Array<Dynamic>, update : Dynamic, options : Dynamic, callBack : Error -> Document -> Void) : Void;
 
 /**
  * Various argument possibilities
@@ -100,22 +100,22 @@ class Collection {
  * Available options:
  * limit, sort, fields, skip, hint, explain, snapshot, timeout, tailable, batchSize
  */
-  @:overload(function() : Cursor {})
-  @:overload(function(fields : Dynamic) : Cursor {})
-  @:overload(function(options : Dynamic) : Cursor {})
-  @:overload(function(selector : Dynamic, fields : Dynamic) : Cursor {})
-  @:overload(function(selector : Dynamic, options : Dynamic) : Cursor {})
-  @:overload(function(selector : Dynamic, fields : Dynamic, options : Dynamic) : Cursor {})
-  @:overload(function(selector : Dynamic, fields : Dynamic, skip : Int, limit : Int) : Cursor {})
-  @:overload(function(selector : Dynamic, fields : Dynamic, skip : Int, limit : Int, timeout : Int) : Cursor {})
-  @:overload(function(callBack : Error -> Cursor -> Void) : Void {})
-  @:overload(function(fields : Dynamic, callBack : Error -> Cursor -> Void) : Void {})
-  @:overload(function(callBack : Error -> Cursor -> Void, options : Dynamic) : Void {})
-  @:overload(function(selector : Dynamic, fields : Dynamic, callBack : Error -> Cursor -> Void) : Void {})
-  @:overload(function(selector : Dynamic, options : Dynamic, callBack : Error -> Cursor -> Void) : Void {})
-  @:overload(function(selector : Dynamic, fields : Dynamic, options : Dynamic, callBack : Error -> Cursor -> Void) : Void {})
-  @:overload(function(selector : Dynamic, fields : Dynamic, skip : Int, limit : Int, callBack : Error -> Cursor -> Void) : Void {})
-  public function find(selector : Dynamic, fields : Dynamic, skip : Int, limit : Int, timeout : Int, callBack : Error -> Cursor -> Void) : Void;
+  @:overload(function() : Cursor<Document> {})
+  @:overload(function(fields : Dynamic) : Cursor<Document> {})
+  @:overload(function(options : Dynamic) : Cursor<Document> {})
+  @:overload(function(selector : Dynamic, fields : Dynamic) : Cursor<Document> {})
+  @:overload(function(selector : Dynamic, options : Dynamic) : Cursor<Document> {})
+  @:overload(function(selector : Dynamic, fields : Dynamic, options : Dynamic) : Cursor<Document> {})
+  @:overload(function(selector : Dynamic, fields : Dynamic, skip : Int, limit : Int) : Cursor<Document> {})
+  @:overload(function(selector : Dynamic, fields : Dynamic, skip : Int, limit : Int, timeout : Int) : Cursor<Document> {})
+  @:overload(function(callBack : Error -> Cursor<Document> -> Void) : Void {})
+  @:overload(function(fields : Dynamic, callBack : Error -> Cursor<Document> -> Void) : Void {})
+  @:overload(function(callBack : Error -> Cursor<Document> -> Void, options : Dynamic) : Void {})
+  @:overload(function(selector : Dynamic, fields : Dynamic, callBack : Error -> Cursor<Document> -> Void) : Void {})
+  @:overload(function(selector : Dynamic, options : Dynamic, callBack : Error -> Cursor<Document> -> Void) : Void {})
+  @:overload(function(selector : Dynamic, fields : Dynamic, options : Dynamic, callBack : Error -> Cursor<Document> -> Void) : Void {})
+  @:overload(function(selector : Dynamic, fields : Dynamic, skip : Int, limit : Int, callBack : Error -> Cursor<Document> -> Void) : Void {})
+  public function find(selector : Dynamic, fields : Dynamic, skip : Int, limit : Int, timeout : Int, callBack : Error -> Cursor<Document> -> Void) : Void;
 
 
   @:overload(function(hint : Array<Dynamic>) : Void {}) // or Array<String> ??
@@ -137,14 +137,14 @@ class Collection {
   public function dropIndexes(callBack : Error -> Bool -> Void) : Void;
 
 
-  @:overload(function(map : String, reduce : String, callBack : Error -> Collection -> Stats -> Void) : Void {})
-  @:overload(function(map : String, reduce : String, options : Dynamic, callBack : Error -> Collection -> Stats -> Void) : Void {})
-  @:overload(function(map : String, reduce : String, callBack : Error -> Collection -> Void) : Void {})
-  @:overload(function(map : String, reduce : String, options : Dynamic, callBack : Error -> Collection -> Void) : Void {})
-  @:overload(function(map : Void -> Void, reduce : Dynamic -> Array<Dynamic> -> Dynamic, callBack : Error -> Collection -> Stats -> Void) : Void {})
-  @:overload(function(map : Void -> Void, reduce : Dynamic -> Array<Dynamic> -> Dynamic, options : Dynamic, callBack : Error -> Collection -> Stats -> Void) : Void {})
-  @:overload(function(map : Void -> Void, reduce : Dynamic -> Array<Dynamic> -> Dynamic, callBack : Error -> Collection -> Void) : Void {})
-  public function mapReduce(map : Void -> Void, reduce : Dynamic -> Array<Dynamic> -> Dynamic, options : Dynamic, callBack : Error -> Collection -> Void) : Void;
+  @:overload(function(map : String, reduce : String, callBack : Error -> Collection<Document> -> Stats -> Void) : Void {})
+  @:overload(function(map : String, reduce : String, options : Dynamic, callBack : Error -> Collection<Document> -> Stats -> Void) : Void {})
+  @:overload(function(map : String, reduce : String, callBack : Error -> Collection<Document> -> Void) : Void {})
+  @:overload(function(map : String, reduce : String, options : Dynamic, callBack : Error -> Collection<Document> -> Void) : Void {})
+  @:overload(function(map : Void -> Void, reduce : Dynamic -> Array<Dynamic> -> Dynamic, callBack : Error -> Collection<Document> -> Stats -> Void) : Void {})
+  @:overload(function(map : Void -> Void, reduce : Dynamic -> Array<Dynamic> -> Dynamic, options : Dynamic, callBack : Error -> Collection<Document> -> Stats -> Void) : Void {})
+  @:overload(function(map : Void -> Void, reduce : Dynamic -> Array<Dynamic> -> Dynamic, callBack : Error -> Collection<Document> -> Void) : Void {})
+  public function mapReduce(map : Void -> Void, reduce : Dynamic -> Array<Dynamic> -> Dynamic, options : Dynamic, callBack : Error -> Collection<Document> -> Void) : Void;
 
 
 

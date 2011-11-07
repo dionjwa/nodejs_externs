@@ -16,15 +16,28 @@ typedef ExpressHttpServerReq = { > NodeHttpServerReq,
 typedef ExpressHttpServerResp = { > NodeHttpServerResp,
 	function render(name : String, params : Dynamic) : Void;
 	function redirect(url : String) : Void;
+  
+  @:overload(function () : Void {})
+  @:overload(function (value : String, code : Int) : Void {})
+  @:overload(function (type : String, value : Dynamic, code : Int) : Void {})
+  function send(value : Dynamic) : Void;
 }
- 
- 
+
+
+typedef AddressAndPort = {
+  address : String,
+  port : Int
+}
+
 typedef ExpressServer = {
 	function use (?middlewareMountPoint :Dynamic, middleware :Dynamic) :ConnectServer;
 	function get(path : String, f : ExpressHttpServerReq ->  ExpressHttpServerResp -> Void) : Void;
+	function post(path : String, f : ExpressHttpServerReq ->  ExpressHttpServerResp -> Void) : Void;
 
 	@:overload(function(port :Int, ready : Void -> Void):Void { } )
 	function listen (port :Int, ?address :String) :Void;
+
+  function address() : AddressAndPort;
 }
 
 extern
@@ -36,8 +49,8 @@ class Express {
 	public function bodyParser() :MiddleWare;
 	public function session(params :Dynamic) :Void;
 	public function router(routes :Dynamic->Void) :Void;
-	public function Static (path :String, ?options :Dynamic) :MiddleWare; 
-	public function errorHandler (options :Dynamic) :MiddleWare;	
+	public function Static (path :String, ?options :Dynamic) :MiddleWare;
+	public function errorHandler (options :Dynamic) :MiddleWare;
 
 	public function logger() : MiddleWare;
 
