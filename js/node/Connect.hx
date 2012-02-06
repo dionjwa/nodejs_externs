@@ -46,6 +46,7 @@ typedef Connect = {
 	function bodyParser() :MiddleWare;
 	function session(params :Dynamic) :Void;
 	function router(routes :Dynamic->Void) :Void;
-	function Static (path :String, ?options :Dynamic) :MiddleWare; 
 	function errorHandler (options :Dynamic) :MiddleWare;	
+	//For 'static' use e.g. untyped __js__("connect.static(__dirname)") since Haxe has reserved the 'static' keyword
 }
+
