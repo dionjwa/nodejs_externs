@@ -44,6 +44,7 @@ typedef Connect = {
 	function createServer (a1 :Dynamic, ?a2 :Dynamic, ?a3 :Dynamic, ?a4 :Dynamic, ?a5 :Dynamic, ?a6 :Dynamic, ?a7 :Dynamic, ?a8 :Dynamic, ?a9 :Dynamic) :ConnectServer;
 	function cookieParser() :MiddleWare;
 	function bodyParser() :MiddleWare;
+	function logger() :MiddleWare;
 	function session(params :Dynamic) :Void;
 	function router(routes :Dynamic->Void) :Void;
 	function Static (path :String, ?options :Dynamic) :MiddleWare;
