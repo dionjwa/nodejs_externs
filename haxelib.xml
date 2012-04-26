@@ -1,7 +1,7 @@
 <project name="nodejs_externs" url="https://github.com/dionjwa/nodejs_externs" license="BSD">
         <user name="dionjwa"/>
         <description>A collection of Node.js externs: Connect, EveryAuth, Forever, Mime, UserAgent, V8Profiler</description>
-        <version name="0.0.3">List the libraries.</version>
+        <version name="0.4">Additions: pubnub, mongodb, socket-io, node-uuid</version>
         <tag v="nodejs"/>
         <tag v="js"/>
 </project>
