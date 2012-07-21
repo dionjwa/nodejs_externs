@@ -47,7 +47,11 @@ typedef Connect = {
 	function logger() :MiddleWare;
 	function session(params :Dynamic) :Void;
 	function router(routes :Dynamic->Void) :Void;
-	function Static (path :String, ?options :Dynamic) :MiddleWare;
 	function errorHandler (options :Dynamic) :MiddleWare;
 }
 
+class ConnectStatic {
+	public static function Static( c : Connect, path : String, ?options : Dynamic ) : MiddleWare {
+		return untyped __js__("c.static(path, options)");
+	}
+}
