@@ -29,9 +29,18 @@ class SocketNamespace {
 
 	@:overload(function(name : String) : SocketNamespace{ } )
   public function emit(event:String,?arg1:Dynamic,?arg2:Dynamic,?arg3:Dynamic):Void;
+
+  public function join(room:String):Void;
+  public function leave(room:String):Void;
+
+  @:native("in")
+  public function in_(room:String):SocketNamespace;
+  public function clients(room:String):Array<SocketNamespace>;
 }
 
 typedef SocketIoManager = {
+
+	var sockets(default,null) : SocketNamespace;
 
 	var store(default, null) : Dynamic;
 	var log(default, null) : Dynamic;
