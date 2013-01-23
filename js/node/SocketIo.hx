@@ -9,6 +9,20 @@ typedef SocketIo = {
 	function listen(?server : Dynamic, ?options : Dynamic, ?fn : Dynamic) : SocketIoManager;
 }
 
+typedef SocketAuth = {
+	headers : Dynamic,
+	time : String,
+	address : { 
+		address : String , 
+		port : Int 
+	},
+	xdomain : Bool,
+	secure : Bool,
+	issued : Int,
+	url : String,
+	query : Dynamic
+}
+
 typedef NodeListener = Dynamic -> Void;
 
 extern
