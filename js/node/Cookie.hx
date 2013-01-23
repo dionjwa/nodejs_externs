@@ -13,7 +13,7 @@ extern class Cookie {
 	
 	public function parse( raw : String ) : Dynamic;
 
-	public static inline function require() : Cookie return untyped __js__("require('cookie')");
+	public static inline function require() : Cookie return untyped __js__("require('cookie')")
 	
 
 }
