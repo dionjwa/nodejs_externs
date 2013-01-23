@@ -50,6 +50,9 @@ class SocketNamespace {
   @:native("in")
   public function in_(room:String):SocketNamespace;
   public function clients(room:String):Array<SocketNamespace>;
+
+  public function set<T>( key : String , value : T , ?cb : Void -> Void ) : Void;
+  public function get<T>( key : String , cb : Null<String> -> T -> Void ) : Void;
 }
 
 typedef SocketIoManager = {
