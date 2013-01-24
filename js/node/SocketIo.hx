@@ -47,8 +47,10 @@ class SocketNamespace {
   public function join(room:String):Void;
   public function leave(room:String):Void;
 
-  @:native("in")
-  public function in_(room:String):SocketNamespace;
+  /*@:native("in")*/
+  public inline function in_(room:String):SocketNamespace return untyped this["in"](room)
+  
+
   public function clients(room:String):Array<SocketNamespace>;
 
   public function set<T>( key : String , value : T , ?cb : Void -> Void ) : Void;
