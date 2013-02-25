@@ -28,6 +28,8 @@ typedef NodeListener = Dynamic -> Void;
 extern
 class SocketNamespace {
 
+	public var id : String;
+
 //  public static function SocketNamespace (socket : Dynamic, name : String) : Void;
   public function send(data : Dynamic, fn : Dynamic) : SocketNamespace;
   public function disconnect () : SocketNamespace;
@@ -55,6 +57,9 @@ class SocketNamespace {
 
   public function set<T>( key : String , value : T , ?cb : Void -> Void ) : Void;
   public function get<T>( key : String , cb : Null<String> -> T -> Void ) : Void;
+
+  public function socket( id : String ) : SocketNamespace;
+
 }
 
 typedef SocketIoManager = {
