@@ -104,13 +104,13 @@ class Db {
   /**
     Create an index on a collection
   **/
-  @:overload(function (collectionName : String, fieldOrSpec : Dynamic, callBack : Error -> String -> Void) {})
+  @:overload(function (collectionName : String, fieldOrSpec : Dynamic, callBack : Error -> String -> Void) : Void {})
   public function createIndex (collectionName : String, fieldOrSpec : Dynamic, unique : Bool, callBack : Error -> String -> Void) : Void;
 
   /**
     Ensure index, create an index if it does not exist
   **/
-  @:overload(function (collectionName : String, fieldOrSpec : Dynamic, callBack : Error -> String -> Void) {})
+  @:overload(function (collectionName : String, fieldOrSpec : Dynamic, callBack : Error -> String -> Void) : Void {})
   public function ensureIndex (collectionName : String, fieldOrSpec : Dynamic, unique : Bool, callBack : Error -> String -> Void) : Void;
 
   /**
@@ -126,7 +126,7 @@ class Db {
   /**
     Index Information
   **/
-  @:overload(function (callBack : Error -> Dynamic -> Void) {})
+  @:overload(function (callBack : Error -> Dynamic -> Void) : Void {})
   public function indexInformation(collectionName : String, callBack : Error -> Dynamic -> Void) : Void;
 
   /**
@@ -167,4 +167,13 @@ class Db {
   public function listeners(event:String):Array<NodeListener>;
   public function setMaxListeners(m:Int):Void;
   public function emit(event:String,?arg1:Dynamic,?arg2:Dynamic,?arg3:Dynamic):Void;
+}
+
+@:native("ObjectID")
+extern
+class ObjectID {
+  public function new( s : String ) : Void;
+  private static function __init__() : Void untyped {
+    ObjectID = Node.require('mongodb').ObjectID;
+  }
 }

@@ -9,10 +9,26 @@ typedef SocketIo = {
 	function listen(?server : Dynamic, ?options : Dynamic, ?fn : Dynamic) : SocketIoManager;
 }
 
+typedef SocketAuth = {
+	headers : Dynamic,
+	time : String,
+	address : { 
+		address : String , 
+		port : Int 
+	},
+	xdomain : Bool,
+	secure : Bool,
+	issued : Int,
+	url : String,
+	query : Dynamic
+}
+
 typedef NodeListener = Dynamic -> Void;
 
 extern
 class SocketNamespace {
+
+	public var id : String;
 
 //  public static function SocketNamespace (socket : Dynamic, name : String) : Void;
   public function send(data : Dynamic, fn : Dynamic) : SocketNamespace;
@@ -29,9 +45,26 @@ class SocketNamespace {
 
 	@:overload(function(name : String) : SocketNamespace{ } )
   public function emit(event:String,?arg1:Dynamic,?arg2:Dynamic,?arg3:Dynamic):Void;
+
+  public function join(room:String):Void;
+  public function leave(room:String):Void;
+
+  /*@:native("in")*/
+  public inline function in_(room:String):SocketNamespace return untyped this["in"](room)
+  
+
+  public function clients(room:String):Array<SocketNamespace>;
+
+  public function set<T>( key : String , value : T , ?cb : Void -> Void ) : Void;
+  public function get<T>( key : String , cb : Null<String> -> T -> Void ) : Void;
+
+  public function socket( id : String ) : SocketNamespace;
+
 }
 
 typedef SocketIoManager = {
+
+	var sockets(default,null) : SocketNamespace;
 
 	var store(default, null) : Dynamic;
 	var log(default, null) : Dynamic;
